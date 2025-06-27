@@ -32,7 +32,8 @@ The Google ADK architecture supports three main communication patterns:
 ## Deployment Patterns
 
 ### Pattern 1: Monolithic Multi-Agent System
-```
+
+```bash
 ┌─────────────────────────────────────────┐
 │           ADK Application               │
 │  ┌─────────────┐  ┌─────────────┐       │
@@ -57,7 +58,8 @@ The Google ADK architecture supports three main communication patterns:
 ```
 
 ### Pattern 2: Distributed Multi-Agent Architecture
-```
+
+```bash
 ┌─────────────────┐    A2A Protocol    ┌─────────────────┐
 │   Client Agent  │◄─────────────────►│  Remote Agent    │
 │   (ADK/FastAPI) │     HTTP/JSON-RPC  │   (ADK/FastAPI) │
@@ -73,7 +75,8 @@ The Google ADK architecture supports three main communication patterns:
 ```
 
 ### Pattern 3: Microservices with Central Orchestration
-```
+
+```bash
 ┌─────────────────────────────────────────────────────────┐
 │                Orchestrator Agent                       │
 │                   (ADK Core)                            │

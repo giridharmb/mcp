@@ -56,14 +56,14 @@ graph TD
 
 ```mermaid
 graph LR
-    Client_Agent[Client Agent (ADK/FastAPI)] --- Remote_Agent[Remote Agent (ADK/FastAPI)]
-    Client_Agent --> MCP_Servers1[MCP Servers]
-    Remote_Agent --> MCP_Servers2[MCP Servers]
-    subgraph MCP_Servers1
+    A[Client Agent] --- B[Remote Agent]
+    A --> C[MCP Servers]
+    B --> D[MCP Servers]
+    subgraph C
         DB1[DB]
         API1[API]
     end
-    subgraph MCP_Servers2
+    subgraph D
         Files[Files]
         Auth[Auth]
     end
@@ -73,12 +73,12 @@ graph LR
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator Agent (ADK Core)] --> Flight[Flight Agent (Cloud Run)]
-    Orchestrator --> Hotel[Hotel Agent (Cloud Run)]
-    Orchestrator --> Weather[Weather Agent (Cloud Run)]
-    Flight --> Flight_MCP[Flight MCP Server]
-    Hotel --> Booking_MCP[Booking MCP Server]
-    Weather --> Weather_MCP[Weather MCP Server]
+    O[Orchestrator Agent] --> F[Flight Agent]
+    O --> H[Hotel Agent]
+    O --> W[Weather Agent]
+    F --> FM[Flight MCP Server]
+    H --> BM[Booking MCP Server]
+    W --> WM[Weather MCP Server]
 ```
 
 ## Data Flow Architecture

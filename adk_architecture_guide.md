@@ -33,7 +33,7 @@ The Google ADK architecture supports three main communication patterns:
 
 ### Pattern 1: Monolithic Multi-Agent System
 
-```
+<pre>
 ┌─────────────────────────────────────────┐
 │           ADK Application               │
 │  ┌─────────────┐  ┌─────────────┐       │
@@ -55,11 +55,11 @@ The Google ADK architecture supports three main communication patterns:
     │  │ MCP │ │ MCP │ │ MCP ││
     │  └─────┘ └─────┘ └─────┘│
     └─────────────────────────┘
-```
+</pre>
 
 ### Pattern 2: Distributed Multi-Agent Architecture
 
-```
+<pre>
 ┌─────────────────┐    A2A Protocol    ┌─────────────────┐
 │   Client Agent  │◄─────────────────►│  Remote Agent    │
 │   (ADK/FastAPI) │     HTTP/JSON-RPC  │   (ADK/FastAPI) │
@@ -72,11 +72,11 @@ The Google ADK architecture supports three main communication patterns:
 │ │ DB  │ │ API │ │                    │ │Files│ │Auth │ │
 │ └─────┘ └─────┘ │                    │ └─────┘ └─────┘ │
 └─────────────────┘                    └─────────────────┘
-```
+</pre>
 
 ### Pattern 3: Microservices with Central Orchestration
 
-```
+<pre>
 ┌─────────────────────────────────────────────────────────┐
 │                Orchestrator Agent                       │
 │                   (ADK Core)                            │
@@ -95,7 +95,7 @@ The Google ADK architecture supports three main communication patterns:
 │Flight MCP   │ │Booking MCP  │ │Weather MCP  │
 │ Server      │ │ Server      │ │ Server      │
 └─────────────┘ └─────────────┘ └─────────────┘
-```
+</pre>
 
 ## Data Flow Architecture
 

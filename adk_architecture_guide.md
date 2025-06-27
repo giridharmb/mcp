@@ -33,7 +33,7 @@ The Google ADK architecture supports three main communication patterns:
 
 ### Pattern 1: Monolithic Multi-Agent System
 
-<pre>
+<pre class="white-space: pre-wrap;">
 ┌─────────────────────────────────────────┐
 │           ADK Application               │
 │  ┌─────────────┐  ┌─────────────┐       │

@@ -56,7 +56,7 @@ graph TD
 
 ```mermaid
 graph LR
-    Client_Agent[Client Agent (ADK/FastAPI)] -- HTTP/JSON-RPC --- Remote_Agent[Remote Agent (ADK/FastAPI)]
+    Client_Agent[Client Agent (ADK/FastAPI)] --- Remote_Agent[Remote Agent (ADK/FastAPI)]
     Client_Agent --> MCP_Servers1[MCP Servers]
     Remote_Agent --> MCP_Servers2[MCP Servers]
     subgraph MCP_Servers1

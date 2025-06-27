@@ -38,10 +38,10 @@ graph TD
     subgraph ADK_Application[ADK Application]
         Coordinator[Coordinator Agent]
         Specialist[Specialist Agents]
-        Coordinator -->|coordinates| Specialist
-        Specialist -->|uses| MCP_Toolset[MCP Toolset]
+        Coordinator --> Specialist
+        Specialist --> MCP_Toolset[MCP Toolset]
     end
-    MCP_Toolset -->|connects to| External_MCP_Servers[External MCP Servers]
+    MCP_Toolset --> External_MCP_Servers[External MCP Servers]
     subgraph External_MCP_Servers
         DB_MCP[DB MCP]
         API_MCP[API MCP]
@@ -56,7 +56,7 @@ graph TD
 
 ```mermaid
 graph LR
-    Client_Agent[Client Agent (ADK/FastAPI)] -- HTTP/JSON-RPC --> Remote_Agent[Remote Agent (ADK/FastAPI)]
+    Client_Agent[Client Agent (ADK/FastAPI)] -- HTTP/JSON-RPC --- Remote_Agent[Remote Agent (ADK/FastAPI)]
     Client_Agent --> MCP_Servers1[MCP Servers]
     Remote_Agent --> MCP_Servers2[MCP Servers]
     subgraph MCP_Servers1
@@ -73,9 +73,9 @@ graph LR
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator Agent (ADK Core)] -->|A2A Protocol| Flight[Flight Agent (Cloud Run)]
-    Orchestrator -->|A2A Protocol| Hotel[Hotel Agent (Cloud Run)]
-    Orchestrator -->|A2A Protocol| Weather[Weather Agent (Cloud Run)]
+    Orchestrator[Orchestrator Agent (ADK Core)] --> Flight[Flight Agent (Cloud Run)]
+    Orchestrator --> Hotel[Hotel Agent (Cloud Run)]
+    Orchestrator --> Weather[Weather Agent (Cloud Run)]
     Flight --> Flight_MCP[Flight MCP Server]
     Hotel --> Booking_MCP[Booking MCP Server]
     Weather --> Weather_MCP[Weather MCP Server]

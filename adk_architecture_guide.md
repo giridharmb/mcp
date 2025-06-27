@@ -33,69 +33,53 @@ The Google ADK architecture supports three main communication patterns:
 
 ### Pattern 1: Monolithic Multi-Agent System
 
-<pre class="white-space: pre-wrap;">
-┌─────────────────────────────────────────┐
-│           ADK Application               │
-│  ┌─────────────┐  ┌─────────────┐       │
-│  │ Coordinator │  │ Specialist  │       │
-│  │   Agent     │  │   Agents    │       │
-│  └─────────────┘  └─────────────┘       │
-│         │               │               │
-│         └───────────────┘               │
-│                 │                       │
-│         ┌───────▼───────┐               │
-│         │  MCP Toolset  │               │
-│         └───────────────┘               │
-└─────────────────────────────────────────┘
-                 │
-    ┌────────────▼────────────┐
-    │    External MCP Servers │
-    │  ┌─────┐ ┌─────┐ ┌─────┐│
-    │  │ DB  │ │ API │ │File ││
-    │  │ MCP │ │ MCP │ │ MCP ││
-    │  └─────┘ └─────┘ └─────┘│
-    └─────────────────────────┘
-</pre>
+```mermaid
+graph TD
+    subgraph ADK_Application[ADK Application]
+        Coordinator[Coordinator Agent]
+        Specialist[Specialist Agents]
+        Coordinator -->|coordinates| Specialist
+        Specialist -->|uses| MCP_Toolset[MCP Toolset]
+    end
+    MCP_Toolset -->|connects to| External_MCP_Servers[External MCP Servers]
+    subgraph External_MCP_Servers
+        DB_MCP[DB MCP]
+        API_MCP[API MCP]
+        File_MCP[File MCP]
+    end
+    External_MCP_Servers --> DB_MCP
+    External_MCP_Servers --> API_MCP
+    External_MCP_Servers --> File_MCP
+```
 
 ### Pattern 2: Distributed Multi-Agent Architecture
 
-<pre>
-┌─────────────────┐    A2A Protocol    ┌─────────────────┐
-│   Client Agent  │◄─────────────────►│  Remote Agent    │
-│   (ADK/FastAPI) │     HTTP/JSON-RPC  │   (ADK/FastAPI) │
-└─────────────────┘                    └─────────────────┘
-         │                                       │
-         ▼                                       ▼
-┌─────────────────┐                    ┌─────────────────┐
-│   MCP Servers   │                    │   MCP Servers   │
-│ ┌─────┐ ┌─────┐ │                    │ ┌─────┐ ┌─────┐ │
-│ │ DB  │ │ API │ │                    │ │Files│ │Auth │ │
-│ └─────┘ └─────┘ │                    │ └─────┘ └─────┘ │
-└─────────────────┘                    └─────────────────┘
-</pre>
+```mermaid
+graph LR
+    Client_Agent[Client Agent (ADK/FastAPI)] -- HTTP/JSON-RPC --> Remote_Agent[Remote Agent (ADK/FastAPI)]
+    Client_Agent --> MCP_Servers1[MCP Servers]
+    Remote_Agent --> MCP_Servers2[MCP Servers]
+    subgraph MCP_Servers1
+        DB1[DB]
+        API1[API]
+    end
+    subgraph MCP_Servers2
+        Files[Files]
+        Auth[Auth]
+    end
+```
 
 ### Pattern 3: Microservices with Central Orchestration
 
-<pre>
-┌─────────────────────────────────────────────────────────┐
-│                Orchestrator Agent                       │
-│                   (ADK Core)                            │
-└────────────────────┬────────────────────────────────────┘
-                     │ A2A Protocol
-        ┌────────────┼────────────┐
-        │            │            │
-        ▼            ▼            ▼
-┌─────────────┐ ┌─────────────┐ ┌─────────────┐
-│ Flight Agent│ │ Hotel Agent │ │ Weather Agt │
-│ (Cloud Run) │ │ (Cloud Run) │ │ (Cloud Run) │
-└─────────────┘ └─────────────┘ └─────────────┘
-        │            │            │
-        ▼            ▼            ▼
-┌─────────────┐ ┌─────────────┐ ┌─────────────┐
-│Flight MCP   │ │Booking MCP  │ │Weather MCP  │
-│ Server      │ │ Server      │ │ Server      │
-└─────────────┘ └─────────────┘ └─────────────┘
-</pre>
+```mermaid
+graph TD
+    Orchestrator[Orchestrator Agent (ADK Core)] -->|A2A Protocol| Flight[Flight Agent (Cloud Run)]
+    Orchestrator -->|A2A Protocol| Hotel[Hotel Agent (Cloud Run)]
+    Orchestrator -->|A2A Protocol| Weather[Weather Agent (Cloud Run)]
+    Flight --> Flight_MCP[Flight MCP Server]
+    Hotel --> Booking_MCP[Booking MCP Server]
+    Weather --> Weather_MCP[Weather MCP Server]
+```
 
 ## Data Flow Architecture
 
